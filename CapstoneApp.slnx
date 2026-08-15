@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CapstoneApp.Domain/CapstoneApp.Domain.csproj" />
+  <Project Path="CapstoneApp.Host/CapstoneApp.Host.csproj" />
+  <Project Path="CapstoneApp.Integrations/CapstoneApp.Integrations.csproj" />
+</Solution>
