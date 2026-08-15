@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CapstoneApp.Domain\CapstoneApp.Domain.csproj" />
+    <ProjectReference Include="..\CapstoneApp.Integrations\CapstoneApp.Integrations.csproj" />
   </ItemGroup>
 
 </Project>
