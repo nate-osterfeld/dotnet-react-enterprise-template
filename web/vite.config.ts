@@ -8,4 +8,13 @@ export default defineConfig({
     outDir: path.resolve(__dirname, '../CapstoneApp.Host/wwwroot'),
     emptyOutDir: true,
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://localhost:7116',
+        changeOrigin: true,
+        secure: false, // Disables SSL verification for local self-signed certs
+      },
+    },
+  },
 })
