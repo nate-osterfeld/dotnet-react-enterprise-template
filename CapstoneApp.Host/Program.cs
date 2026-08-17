@@ -9,7 +9,9 @@ builder.Services.AddOpenApi();
 
 // Register Entity Framework Core with SQL Server for data persistence
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("dotnet-react-db")));
+
+builder.Configuration.AddJsonFile("appsettings.secrets.json", optional: true, reloadOnChange: true);
 
 var app = builder.Build();
 
