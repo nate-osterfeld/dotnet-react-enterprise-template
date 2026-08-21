@@ -7,11 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddOpenApi();
 
+// Load secrets file
+builder.Configuration.AddJsonFile("appsettings.secrets.json", optional: true, reloadOnChange: true);
+
 // Register Entity Framework Core with SQL Server for data persistence
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("dotnet-react-db")));
-
-builder.Configuration.AddJsonFile("appsettings.secrets.json", optional: true, reloadOnChange: true);
 
 var app = builder.Build();
 
