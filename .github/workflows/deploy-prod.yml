@@ -44,7 +44,7 @@ jobs:
         with:
           containerAppName: dotnet-react-prod
           resourceGroup: rg-dotnet-react-shared
-          imageToDeploy: dotnetreactacr.azurecr.io/dotnet-react-app:${{ github.sha }}
+          imageToDeploy: dotnetreactacr.azurecr.io/dotnet-react-app:prod-${{ github.sha }}
           acrName: dotnetreactacr
           acrUsername: dotnetreactacr
           acrPassword: ${{ secrets.ACR_PASSWORD }}
