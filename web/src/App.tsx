@@ -52,6 +52,7 @@ function App() {
   return (
     <div style={{ maxWidth: '600px', margin: '40px auto', fontFamily: 'Arial' }}>
       <h1>Todo App</h1>
+      <h2>test change</h2>
 
       <form onSubmit={addTodo} style={{ marginBottom: '20px' }}>
         <input
