@@ -1,10 +1,10 @@
-name: Deploy Dev Environment
+name: Deploy Test Environment
 
 on:
+  # Runs on 
   push:
     branches:
-      - '**'
-      - '!staging'
+      - staging
 
 jobs:
   build-and-deploy:
@@ -16,16 +16,15 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS_DEV }}
+          creds: ${{ secrets.AZURE_CREDENTIALS_TEST }}
 
-      # Dynamically creates appsettings.secrets.json file on the fly for the build
       - name: Create appsettings.secrets File
         run: |
           echo "{
             \"connectionstrings\": {
               \"_msg\": \"add any necessary connection string names here, put the strings themselves in appsettings.secrets.json\",
-              \"dotnet-react-db\": \"${{ secrets.AZURE_SQL_CONNECTION_STRING_DEV }}\",
-              \"dotnet-react-db.dev\": \"${{ secrets.AZURE_SQL_CONNECTION_STRING_DEV }}\"
+              \"dotnet-react-db\": \"${{ secrets.AZURE_SQL_CONNECTION_STRING_TEST }}\",
+              \"dotnet-react-db.test\": \"${{ secrets.AZURE_SQL_CONNECTION_STRING_TEST }}\"
             }
           }" > CapstoneApp.Host/appsettings.secrets.json
 
@@ -39,14 +38,14 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: dotnetreactacr.azurecr.io/dotnet-react-app:dev-${{ github.sha }}
+          tags: dotnetreactacr.azurecr.io/dotnet-react-app:${{ github.sha }}
 
       - name: Deploy to Azure Container App
         uses: azure/container-apps-deploy-action@v2
         with:
-          containerAppName: dotnet-react-dev
+          containerAppName: dotnet-react-test
           resourceGroup: rg-dotnet-react-shared
-          imageToDeploy: dotnetreactacr.azurecr.io/dotnet-react-app:${{ github.sha }}
+          imageToDeploy: dotnetreactacr.azurecr.io/dotnet-react-app:test-${{ github.sha }}
           acrName: dotnetreactacr
           acrUsername: dotnetreactacr
           acrPassword: ${{ secrets.ACR_PASSWORD }}
